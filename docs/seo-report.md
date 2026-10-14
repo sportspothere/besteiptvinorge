@@ -89,6 +89,7 @@ Repeatable local commands:
 ```powershell
 npx.cmd tsc --noEmit
 npm.cmd run build
+npm.cmd run build:static
 node scripts/check-seo.cjs
 node scripts/check-browser.cjs
 ```
