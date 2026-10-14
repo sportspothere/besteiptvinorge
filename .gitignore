@@ -24,3 +24,8 @@ tsconfig.tsbuildinfo
 
 # Local headless browser profiles and screenshots
 .qa/
+
+# Local audit notes and optional verification/asset-generation tools
+/docs/
+/scripts/check-*.cjs
+/scripts/optimize-images.cjs
