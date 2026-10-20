@@ -1,0 +1,46 @@
+name: Hostinger build check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      STATIC_EXPORT: "false"
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Build and type-check
+        run: npm run build
+
+      # Deployment is handled by Hostinger's existing GitHub integration.
+      # In Hostinger, enable auto-deploy for this repository's main branch.
+      # Main must use: npm run build, output .next, start npm start.
+      # PR builds here do not publish the production website.
+      # Hostinger auto-deploy runs independently of this build check.
+      # Require "Build website" in main's branch rules to block untested merges.
