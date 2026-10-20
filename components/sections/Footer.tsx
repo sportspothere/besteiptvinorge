@@ -17,11 +17,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
           <a href="#" aria-label="Beste IPTV i Norge – gå til toppen" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded">
             <Image
-              src="/logo/logo.svg"
+              src="/logo/logo.png"
               alt="Beste IPTV i Norge-logo"
-              width={220}
-              height={80}
-              className="h-14 w-auto object-contain"
+              width={96}
+              height={96}
+              className="h-24 w-24 object-contain rounded-lg"
               unoptimized
             />
           </a>

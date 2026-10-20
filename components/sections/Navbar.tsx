@@ -41,11 +41,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         <a href="#" className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded" aria-label="Beste IPTV i Norge – gå til toppen">
           <Image
-            src={isDark ? "/logo/logo-dark.svg" : "/logo/logo-light.svg"}
+            src="/logo/logo.png"
             alt="Beste IPTV i Norge-logo"
-            width={380}
-            height={120}
-            className="h-16 w-auto object-contain"
+            width={160}
+            height={160}
+            className="h-16 w-16 md:h-20 md:w-20 object-contain rounded-lg"
             priority
             unoptimized
           />

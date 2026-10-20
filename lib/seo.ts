@@ -32,7 +32,15 @@ export const siteMetadata: Metadata = {
   twitter: { card: "summary_large_image", title: homeTitle, description: homeDescription,
     ...(siteUrl ? { images: [`${siteUrl}/social-card.png`] } : {}),
   },
-  icons: { icon: "/logo/logo.png" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=20261020-logo", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: "/logo/favicon-32.png?v=20261020-logo", sizes: "32x32", type: "image/png" },
+      { url: "/logo/favicon-192.png?v=20261020-logo", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico?v=20261020-logo",
+    apple: { url: "/logo/apple-touch-icon.png?v=20261020-logo", sizes: "180x180", type: "image/png" },
+  },
 };
 
 export const homeMetadata: Metadata = {
