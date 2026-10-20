@@ -45,20 +45,20 @@ export const t = {
       plans: [
         {
           name: "1 Måned",
-          price: "149",
+          price: "106",
           period: "/ måned",
           features: ["50 000+ TV-kanaler", "4K-kvalitet", "2 enheter", "Support 24/7", "Anti-frys"],
         },
         {
           name: "3 Måneder",
-          price: "349",
+          price: "176",
           period: "/ 3 måneder",
           popular: true,
           features: ["50 000+ TV-kanaler", "4K-kvalitet", "4 enheter", "Support 24/7", "Anti-frys", "Gratis installasjon"],
         },
         {
           name: "12 Måneder",
-          price: "899",
+          price: "526",
           period: "/ år",
           features: ["50 000+ TV-kanaler", "4K-kvalitet", "6 enheter", "Prioritert support", "Anti-frys", "Gratis installasjon", "VM-tilgang"],
         },
