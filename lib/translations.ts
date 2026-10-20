@@ -2,7 +2,7 @@ export const t = {
   no: {
     nav: {
       brand: "Beste IPTV i Norge",
-      links: ["Før du bestiller", "Enheter og innhold", "Oppsett", "Abonnement", "Spørsmål og hjelp", "Kontakt"],
+      links: ["Før du bestiller", "Enheter", "Oppsett", "Abonnement", "Spørsmål og hjelp", "Kontakt"],
       hrefs: ["#features", "#devices", "#how-it-works", "#pricing", "#faq", "#contact"],
       cta: "Spør om abonnement",
       lang: "NO",
