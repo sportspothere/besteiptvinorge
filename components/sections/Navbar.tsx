@@ -45,7 +45,7 @@ export default function Navbar() {
             alt="Beste IPTV i Norge-logo"
             width={160}
             height={160}
-            className="h-16 w-16 md:h-20 md:w-20 object-contain rounded-lg"
+            className="h-9 w-9 md:h-10 md:w-10 object-contain rounded-lg"
             priority
             unoptimized
           />
