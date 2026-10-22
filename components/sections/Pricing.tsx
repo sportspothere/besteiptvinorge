@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Tv, Monitor, Zap, Shield } from "lucide-react";
+import OrderForm, { type OrderOffer } from "@/components/OrderForm";
 import { useLang } from "@/lib/lang-context";
 
 const FEATURES = [
@@ -14,7 +15,6 @@ const FEATURES = [
   "Avklar oppsigelse og klage",
 ];
 
-const WA = "https://wa.me/447460010370?text=Hei%21%20Jeg%20er%20interessert%20i%20et%20IPTV-abonnement.%20Kan%20du%20sende%20meg%20mer%20informasjon%3F";
 
 const PLANS = [
   {
@@ -66,6 +66,7 @@ const PLANS = [
 export default function Pricing() {
   const { theme } = useLang();
   const dark = theme === "dark";
+  const [offer, setOffer] = useState<OrderOffer | null>(null);
   const [devices, setDevices] = useState<"one" | "two">("one");
 
   return (
@@ -216,11 +217,10 @@ export default function Pricing() {
                           </div>
                         </div>
 
-                        <a
-                          href={WA}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block text-center py-3.5 rounded-2xl font-black text-sm mb-4 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        <button
+                          type="button"
+                          onClick={() => setOffer({ name: plan.name, devices: devices === "one" ? 1 : 2, price })}
+                          className="block w-full text-center py-3.5 rounded-2xl font-black text-sm mb-4 transition-all hover:scale-[1.02] active:scale-[0.98]"
                           style={{
                             background: "linear-gradient(90deg,#F5B335,#FFC84A,#F5B335)",
                             color: "#0f1e4a",
@@ -228,8 +228,8 @@ export default function Pricing() {
                             letterSpacing: "0.04em",
                           }}
                         >
-                          {plan.cta}
-                        </a>
+                          Bestill n&aring;
+                        </button>
 
                         <div
                           className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl mb-4 text-xs font-semibold"
@@ -319,19 +319,18 @@ export default function Pricing() {
                         )}
                       </div>
 
-                      <a
-                        href={WA}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block text-center py-3.5 rounded-2xl font-black text-sm mb-5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      <button
+                          type="button"
+                          onClick={() => setOffer({ name: plan.name, devices: devices === "one" ? 1 : 2, price })}
+                        className="block w-full text-center py-3.5 rounded-2xl font-black text-sm mb-5 transition-all hover:scale-[1.02] active:scale-[0.98]"
                         style={{
                           background: "linear-gradient(90deg,#00205B 0%,#1a3a8f 50%,#00205B 100%)",
                           color: "#fff",
                           boxShadow: "0 4px 14px rgba(0,32,91,0.3)",
                         }}
                       >
-                        {plan.cta}
-                      </a>
+                        Bestill n&aring;
+                      </button>
 
                       <div className={`h-px mb-5 ${dark ? "bg-white/[0.08]" : "bg-slate-100"}`} />
                     </div>
@@ -365,6 +364,7 @@ export default function Pricing() {
         </motion.div>
 
       </div>
+      {offer && <OrderForm offer={offer} onClose={() => setOffer(null)} />}
     </section>
   );
 }
