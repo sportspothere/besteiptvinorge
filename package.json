@@ -14,7 +14,7 @@
     "framer-motion": "^11.2.10",
     "lucide-react": "^0.395.0",
     "next": "^16.4.1",
-    "react": "^18",
+    "react": "^19",
     "react-dom": "^18",
     "tailwind-merge": "^3.7.0"
   },
@@ -22,7 +22,7 @@
     "@next/swc-wasm-nodejs": "^16.4.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^19",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
