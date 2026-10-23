@@ -35,8 +35,14 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Check dependency security advisories
+        run: npm audit --audit-level=moderate
+
       - name: Build and type-check
         run: npm run build
+
+      - name: Verify security headers and protected paths
+        run: node scripts/verify-security.cjs
 
       # Deployment is handled by Hostinger's existing GitHub integration.
       # In Hostinger, enable auto-deploy for this repository's main branch.

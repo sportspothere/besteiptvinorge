@@ -113,7 +113,7 @@ export default function Pricing() {
           <button
             onClick={() => setDevices("one")}
             aria-pressed={devices === "one"}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B] ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B] ${
               devices === "one"
                 ? "bg-[#00205B] text-white shadow-md"
                 : dark ? "text-gray-400 hover:text-white" : "text-slate-500 hover:text-slate-800"
@@ -126,7 +126,7 @@ export default function Pricing() {
             onClick={() => setDevices(d => d === "one" ? "two" : "one")}
             aria-label={devices === "two" ? "Bytt til 1 enhet" : "Bytt til 2 enheter"}
             aria-pressed={devices === "two"}
-            className={`relative w-14 h-7 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B] ${
+            className={`relative w-14 h-7 rounded-full transition-colors duration-300 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B] ${
               devices === "two" ? "bg-[#BA0C2F]" : "bg-slate-300"
             }`}
           >
@@ -140,7 +140,7 @@ export default function Pricing() {
           <button
             onClick={() => setDevices("two")}
             aria-pressed={devices === "two"}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#BA0C2F] ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#BA0C2F] ${
               devices === "two"
                 ? "bg-[#BA0C2F] text-white shadow-md"
                 : dark ? "text-gray-400 hover:text-white" : "text-slate-500 hover:text-slate-800"

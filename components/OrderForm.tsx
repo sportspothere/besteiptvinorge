@@ -75,7 +75,7 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
     setOrderMessage(message);
   }
 
-  const inputClass = `mt-2 w-full rounded-xl border px-4 py-3 outline-none transition focus:ring-2 focus:ring-[#4d9de0] ${dark ? "border-white/15 bg-white/5 text-white" : "border-slate-200 bg-slate-50 text-slate-900"}`;
+  const inputClass = `mt-2 w-full rounded-xl border px-4 py-3 outline-hidden transition focus:ring-2 focus:ring-[#4d9de0] ${dark ? "border-white/15 bg-white/5 text-white" : "border-slate-200 bg-slate-50 text-slate-900"}`;
 
   return (
     <dialog
@@ -84,11 +84,11 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
       onClick={event => { if (event.target === event.currentTarget) onClose(); }}
       aria-labelledby="order-title"
       aria-describedby="order-description"
-      className={`m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-3xl border p-0 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-sm ${dark ? "border-white/10 bg-[#0b1024] text-white" : "border-slate-200 bg-white text-slate-900"}`}
+      className={`m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-3xl border p-0 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-xs ${dark ? "border-white/10 bg-[#0b1024] text-white" : "border-slate-200 bg-white text-slate-900"}`}
     >
       <div className="p-6 sm:p-8">
         <div className="flex items-start justify-between gap-4">
-          <h2 ref={choiceHeading} tabIndex={-1} id="order-title" className="text-2xl font-bold outline-none">{trial ? (orderMessage ? "Hvor vil du be om aktivering?" : "Prøv gratis i 24 timer") : (orderMessage ? "Hvordan vil du bestille?" : "Bestill abonnement")}</h2>
+          <h2 ref={choiceHeading} tabIndex={-1} id="order-title" className="text-2xl font-bold outline-hidden">{trial ? (orderMessage ? "Hvor vil du be om aktivering?" : "Prøv gratis i 24 timer") : (orderMessage ? "Hvordan vil du bestille?" : "Bestill abonnement")}</h2>
           <button type="button" onClick={onClose} aria-label="Lukk skjema" className="rounded-full p-2 hover:bg-slate-400/15 focus-visible:ring-2 focus-visible:ring-[#4d9de0]"><X size={20} /></button>
         </div>
         <div className="my-5 rounded-2xl bg-gradient-to-r from-[#00205B] to-[#1a3a8f] p-4 text-white">
@@ -151,7 +151,7 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
                   event.preventDefault();
                   document.getElementById(`country-option-${next}`)?.focus();
                 }}
-                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left outline-none transition ${country === option ? "bg-[#00205B] text-white" : dark ? "hover:bg-white/10 focus:bg-white/10" : "hover:bg-slate-100 focus:bg-slate-100"}`}>
+                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left outline-hidden transition ${country === option ? "bg-[#00205B] text-white" : dark ? "hover:bg-white/10 focus:bg-white/10" : "hover:bg-slate-100 focus:bg-slate-100"}`}>
                 {option}{country === option && <Check size={16} />}
               </button>)}
             </div>}

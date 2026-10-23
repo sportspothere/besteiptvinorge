@@ -35,7 +35,7 @@ export default function FloatingWhatsApp() {
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
             className="fixed bottom-6 right-6 z-50 w-[calc(100vw-3rem)] max-w-[340px]"
-            style={{ filter: "drop-shadow(0 20px 48px rgba(0,0,0,0.18))" }}
+            style={{ filter: "drop-shadow-sm(0 20px 48px rgba(0,0,0,0.18))" }}
           >
             <div
               className="relative rounded-[22px] overflow-hidden bg-white"

@@ -60,7 +60,7 @@ export default function AnnouncementBar() {
           whileHover={{ scale: 1.05, boxShadow: "0 0 16px rgba(255,255,255,0.25)" }}
           whileTap={{ scale: 0.97 }}
           className="text-sm font-bold px-4 py-1.5 rounded-full text-white transition-all"
-          style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.4)", backdropFilter: "blur(8px)" }}
+          style={{ background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.4)", backdropFilter: "blur-sm(8px)" }}
         >
           Se abonnementer →
         </motion.a>
@@ -68,7 +68,7 @@ export default function AnnouncementBar() {
 
       <button
         onClick={() => setVisible(false)}
-        className="px-2 text-white/60 hover:text-white transition-colors text-lg leading-none shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded"
+        className="px-2 text-white/60 hover:text-white transition-colors text-lg leading-none shrink-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white rounded-sm"
         aria-label="Lukk kunngjøring"
       >
         <span aria-hidden="true">×</span>

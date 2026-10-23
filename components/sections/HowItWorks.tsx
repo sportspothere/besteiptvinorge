@@ -109,7 +109,7 @@ export default function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className={`rounded-2xl p-6 flex flex-col gap-5 ${dark ? "glass" : "bg-slate-50 border border-slate-200 shadow-sm"}`}
+                className={`rounded-2xl p-6 flex flex-col gap-5 ${dark ? "glass" : "bg-slate-50 border border-slate-200 shadow-xs"}`}
                 style={dark ? { border: `1px solid ${color}25` } : {}}
               >
                 <StepVisual index={i} dark={dark} />
