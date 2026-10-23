@@ -43,9 +43,9 @@ function MovieCard({ movie, dark }: { movie: typeof MOVIES[0]; dark: boolean }) 
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
       <div className="absolute top-2 start-2">
-        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full text-white backdrop-blur-sm" style={{ background: `${movie.accent}bb` }}>{movie.tag}</span>
+        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full text-white backdrop-blur-xs" style={{ background: `${movie.accent}bb` }}>{movie.tag}</span>
       </div>
-      <div className="absolute top-2 end-2 flex items-center gap-0.5 bg-black/60 backdrop-blur-sm px-1.5 py-0.5 rounded-md">
+      <div className="absolute top-2 end-2 flex items-center gap-0.5 bg-black/60 backdrop-blur-xs px-1.5 py-0.5 rounded-md">
         <Star size={9} fill="#fbbf24" className="text-yellow-400" />
         <span className="text-yellow-400 text-[10px] font-bold">{movie.rating}</span>
       </div>

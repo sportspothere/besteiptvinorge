@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { t } from "@/lib/translations";
+import OrderForm from "@/components/OrderForm";
 
-const WA = "https://wa.me/447460010370?text=Hei%21%20Jeg%20er%20interessert%20i%20et%20IPTV-abonnement.%20Kan%20du%20sende%20meg%20mer%20informasjon%3F";
 
 const SLIDES = [
   {
@@ -42,6 +42,7 @@ const BTN_GRADIENT      = "linear-gradient(90deg, #00205B, #BA0C2F)";
 export default function Hero() {
   const tx = t.no.hero;
   const [cur, setCur] = useState(0);
+  const [trialOpen, setTrialOpen] = useState(false);
 
   const next = () => setCur(c => (c + 1) % SLIDES.length);
   const prev = () => setCur(c => (c - 1 + SLIDES.length) % SLIDES.length);
@@ -107,7 +108,7 @@ export default function Hero() {
             >
               {slide.tag}
             </span>
-            <span className="text-sm font-semibold text-white/90 drop-shadow">{slide.badge}</span>
+            <span className="text-sm font-semibold text-white/90 drop-shadow-sm">{slide.badge}</span>
           </motion.div>
         </AnimatePresence>
 
@@ -136,7 +137,7 @@ export default function Hero() {
           initial={false}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-gray-200 text-sm sm:text-base md:text-xl max-w-xl mb-10 leading-relaxed drop-shadow"
+          className="text-gray-200 text-sm sm:text-base md:text-xl max-w-xl mb-10 leading-relaxed drop-shadow-sm"
         >
           {tx.sub}
         </motion.p>
@@ -147,19 +148,18 @@ export default function Hero() {
           transition={{ delay: 0.4 }}
           className="flex flex-wrap gap-3 mb-14"
         >
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg text-white transition-all hover:scale-105 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
+          <button
+            type="button"
+            onClick={() => setTrialOpen(true)}
+            className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg text-white transition-all hover:scale-105 hover:opacity-90 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
             style={{ background: BTN_GRADIENT, boxShadow: "0 2px 10px rgba(0,32,91,0.35)" }}
           >
             <Play size={20} fill="white" aria-hidden="true" />
-            {tx.cta1}
-          </a>
+            Prøv gratis i 24 timer
+          </button>
           <a
             href="#pricing"
-            className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/50 backdrop-blur-sm bg-white/10 hover:bg-[#00205B]/20 hover:border-[#00205B] hover:text-white transition-all hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
+            className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/50 backdrop-blur-xs bg-white/10 hover:bg-[#00205B]/20 hover:border-[#00205B] hover:text-white transition-all hover:scale-105 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
           >
             {tx.cta2}
           </a>
@@ -169,14 +169,14 @@ export default function Hero() {
       <button
         onClick={prev}
         aria-label="Forrige lysbilde"
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:border-[#00205B] hover:bg-[#00205B]/20 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-xs flex items-center justify-center text-white hover:border-[#00205B] hover:bg-[#00205B]/20 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
       >
         <ChevronLeft size={20} aria-hidden="true" />
       </button>
       <button
         onClick={next}
         aria-label="Neste lysbilde"
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white hover:border-[#00205B] hover:bg-[#00205B]/20 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/40 border border-white/25 backdrop-blur-xs flex items-center justify-center text-white hover:border-[#00205B] hover:bg-[#00205B]/20 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
       >
         <ChevronRight size={20} aria-hidden="true" />
       </button>
@@ -193,7 +193,7 @@ export default function Hero() {
             role="tab"
             aria-selected={i === cur}
             aria-label={`Lysbilde ${i + 1} av ${SLIDES.length}`}
-            className="rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="rounded-full transition-all duration-300 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
             style={{
               width: i === cur ? 28 : 8,
               height: 8,
@@ -226,6 +226,7 @@ export default function Hero() {
       >
         <ChevronDown size={22} />
       </motion.div>
+      {trialOpen && <OrderForm offer={{ name: "Gratis IPTV-test – 24 timer", devices: 1, price: 0, kind: "trial" }} onClose={() => setTrialOpen(false)} />}
     </section>
   );
 }

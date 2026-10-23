@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // Static exports must configure equivalent headers on their web host.
+  ...(process.env.STATIC_EXPORT === "true" ? {} : {
+    async headers() {
+      return [{
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Content-Security-Policy", value: "base-uri 'self'; object-src 'none'; frame-ancestors 'none'" },
+        ],
+      }];
+    },
+  }),
   experimental: {
     optimizeCss: true,
   },

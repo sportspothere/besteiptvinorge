@@ -15,7 +15,7 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
-          <a href="#" aria-label="Beste IPTV i Norge – gå til toppen" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded">
+          <a href="#" aria-label="Beste IPTV i Norge – gå til toppen" className="focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm">
             <Image
               src="/logo/logo.png"
               alt="Beste IPTV i Norge-logo"
@@ -34,7 +34,7 @@ export default function Footer() {
                 <li key={i}>
                   <a
                     href={tx.hrefs[i]}
-                    className={`text-sm transition-colors hover:text-[#00205B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded ${dark ? "text-gray-400" : "text-slate-500"}`}
+                    className={`text-sm transition-colors hover:text-[#00205B] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm ${dark ? "text-gray-400" : "text-slate-500"}`}
                   >
                     {link}
                   </a>

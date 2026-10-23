@@ -20,7 +20,7 @@ export default function Contact() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
-  const inputClass = `w-full rounded-xl px-4 py-3 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B]/60 ${
+  const inputClass = `w-full rounded-xl px-4 py-3 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B]/60 ${
     dark
       ? "bg-white/5 border border-white/10 text-gray-200 placeholder:text-gray-500"
       : "bg-slate-100 border border-slate-200 text-slate-800 placeholder:text-slate-500 focus:bg-white focus:border-[#00205B]"
@@ -49,7 +49,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           whileHover={{ scale: 1.03 }}
-          className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-[#25D366] text-white font-bold text-lg mb-8 shadow-lg shadow-[#25D366]/30 hover:shadow-[#25D366]/50 transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
+          className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-[#25D366] text-white font-bold text-lg mb-8 shadow-lg shadow-[#25D366]/30 hover:shadow-[#25D366]/50 transition-shadow focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#25D366]"
           aria-label="Chat med oss på WhatsApp"
         >
           <MessageCircle size={24} aria-hidden="true" />
@@ -70,7 +70,7 @@ export default function Contact() {
           viewport={{ once: true }}
           onSubmit={handleSubmit}
           className={`rounded-2xl p-8 space-y-5 ${
-            dark ? "glass neon-border-purple" : "bg-slate-50 border border-slate-200 shadow-sm"
+            dark ? "glass neon-border-purple" : "bg-slate-50 border border-slate-200 shadow-xs"
           }`}
           aria-label="Kontaktskjema"
         >
@@ -123,7 +123,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white font-bold hover:opacity-90 hover:scale-[1.02] transition-all shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white font-bold hover:opacity-90 hover:scale-[1.02] transition-all shadow-md focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
           >
             <Send size={18} aria-hidden="true" />
             {tx.send}

@@ -16,19 +16,19 @@ export default function Navbar() {
 
   const navBg = isDark
     ? "bg-black/95 backdrop-blur-xl border-b border-white/10 shadow-lg py-3"
-    : "bg-white border-b border-gray-200 shadow-sm py-3";
+    : "bg-white border-b border-gray-200 shadow-xs py-3";
 
   const linkClass = isDark
-    ? "text-sm text-gray-400 hover:text-[#BA0C2F] font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BA0C2F] rounded"
-    : "text-sm text-slate-600 hover:text-[#00205B] font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded";
+    ? "text-sm text-gray-400 hover:text-[#BA0C2F] font-medium transition-colors duration-200 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#BA0C2F] rounded-sm"
+    : "text-sm text-slate-600 hover:text-[#00205B] font-medium transition-colors duration-200 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm";
 
   const mobileMenuBg = isDark
     ? "bg-black/95 border-t border-white/10"
     : "bg-white border-t border-gray-100 shadow-lg";
 
   const mobileLinkClass = isDark
-    ? "text-gray-300 hover:text-[#BA0C2F] font-medium transition-colors py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BA0C2F] rounded"
-    : "text-slate-600 hover:text-[#00205B] font-medium transition-colors py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded";
+    ? "text-gray-300 hover:text-[#BA0C2F] font-medium transition-colors py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#BA0C2F] rounded-sm"
+    : "text-slate-600 hover:text-[#00205B] font-medium transition-colors py-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm";
 
   return (
     <motion.nav
@@ -39,7 +39,7 @@ export default function Navbar() {
       aria-label="Hovednavigasjon"
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] rounded" aria-label="Beste IPTV i Norge – gå til toppen">
+        <a href="#" className="flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm" aria-label="Beste IPTV i Norge – gå til toppen">
           <Image
             src="/logo/logo.png"
             alt="Beste IPTV i Norge-logo"
@@ -62,7 +62,7 @@ export default function Navbar() {
             onClick={toggleTheme}
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${
+            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-1 ${
               isDark
                 ? "bg-yellow-400/15 text-yellow-300 border border-yellow-400/30 hover:bg-yellow-400/25 focus-visible:ring-yellow-400"
                 : "bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200 focus-visible:ring-slate-400"
@@ -86,13 +86,13 @@ export default function Navbar() {
             href={WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:block text-sm font-bold px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white hover:opacity-90 hover:scale-105 transition-all shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
+            className="hidden md:block text-sm font-bold px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white hover:opacity-90 hover:scale-105 transition-all shadow-md focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
           >
             {tx.cta}
           </a>
 
           <button
-            className={`md:hidden p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00205B] ${isDark ? "text-gray-300" : "text-slate-700"}`}
+            className={`md:hidden p-1 rounded-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] ${isDark ? "text-gray-300" : "text-slate-700"}`}
             onClick={() => setOpen(!open)}
             aria-label={open ? "Lukk meny" : "Åpne meny"}
             aria-expanded={open}
@@ -122,7 +122,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="text-sm font-bold px-4 py-3 rounded-full bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
+              className="text-sm font-bold px-4 py-3 rounded-full bg-gradient-to-r from-[#00205B] to-[#BA0C2F] text-white text-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#00205B]"
             >
               {tx.cta}
             </a>

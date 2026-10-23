@@ -26,7 +26,7 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className={`rounded-2xl px-6 ${
-            dark ? "glass neon-border-cyan" : "bg-white border border-slate-200 shadow-sm"
+            dark ? "glass neon-border-cyan" : "bg-white border border-slate-200 shadow-xs"
           }`}
         >
           {tx.items.map((item, i) => (
