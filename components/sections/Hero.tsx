@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { t } from "@/lib/translations";
-import OrderForm from "@/components/OrderForm";
+import { useRouter } from "next/navigation";
 
 
 const SLIDES = [
@@ -42,7 +42,7 @@ const BTN_GRADIENT      = "linear-gradient(90deg, #00205B, #BA0C2F)";
 export default function Hero() {
   const tx = t.no.hero;
   const [cur, setCur] = useState(0);
-  const [trialOpen, setTrialOpen] = useState(false);
+  const router = useRouter();
 
   const next = () => setCur(c => (c + 1) % SLIDES.length);
   const prev = () => setCur(c => (c - 1 + SLIDES.length) % SLIDES.length);
@@ -150,7 +150,7 @@ export default function Hero() {
         >
           <button
             type="button"
-            onClick={() => setTrialOpen(true)}
+            onClick={() => router.push("/checkout?duration=trial&devices=1")}
             className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg text-white transition-all hover:scale-105 hover:opacity-90 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white"
             style={{ background: BTN_GRADIENT, boxShadow: "0 2px 10px rgba(0,32,91,0.35)" }}
           >
@@ -226,7 +226,6 @@ export default function Hero() {
       >
         <ChevronDown size={22} />
       </motion.div>
-      {trialOpen && <OrderForm offer={{ name: "Gratis IPTV-test – 24 timer", devices: 1, price: 0, kind: "trial" }} onClose={() => setTrialOpen(false)} />}
     </section>
   );
 }

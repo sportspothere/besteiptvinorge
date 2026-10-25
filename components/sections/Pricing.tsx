@@ -2,71 +2,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Tv, Monitor, Zap, Shield } from "lucide-react";
-import OrderForm, { type OrderOffer } from "@/components/OrderForm";
+import Link from "next/link";
+import { PLANS } from "@/lib/offers";
 import { useLang } from "@/lib/lang-context";
-
-const FEATURES = [
-  "Be om oppdatert innholdsoversikt",
-  "Avklar kvalitet for enheten din",
-  "Sjekk distribusjonsrettigheter",
-  "Avklar samtidige strømmer",
-  "Sjekk eventuelle appkostnader",
-  "Les vilkår for fornyelse",
-  "Avklar oppsigelse og klage",
-];
-
-
-const PLANS = [
-  {
-    id: "1m",
-    name: "1 MÅNED",
-    bonus: null as string | null,
-    prices: { one: 106, two: 176 },
-    period: "/ måned",
-    savings: null as string | null,
-    features: FEATURES.slice(0, 7),
-    gold: false,
-    cta: "Spør om abonnement",
-  },
-  {
-    id: "3m",
-    name: "3 MÅNEDER",
-    bonus: null as string | null,
-    prices: { one: 176, two: 326 },
-    period: "/ 3 måneder",
-    savings: null as string | null,
-    features: FEATURES.slice(0, 9),
-    gold: false,
-    cta: "Spør om abonnement",
-  },
-  {
-    id: "6m",
-    name: "6 MÅNEDER",
-    bonus: null as string | null,
-    prices: { one: 326, two: 576 },
-    period: "/ 6 måneder",
-    savings: null as string | null,
-    features: FEATURES.slice(0, 10),
-    gold: false,
-    cta: "Spør om abonnement",
-  },
-  {
-    id: "12m",
-    name: "12 MÅNEDER",
-    bonus: null as string | null,
-    prices: { one: 526, two: 876 },
-    period: "/ år",
-    savings: null as string | null,
-    features: FEATURES,
-    gold: true,
-    cta: "Spør om årsabonnement",
-  },
-];
 
 export default function Pricing() {
   const { theme } = useLang();
   const dark = theme === "dark";
-  const [offer, setOffer] = useState<OrderOffer | null>(null);
   const [devices, setDevices] = useState<"one" | "two">("one");
 
   return (
@@ -217,9 +159,8 @@ export default function Pricing() {
                           </div>
                         </div>
 
-                        <button
-                          type="button"
-                          onClick={() => setOffer({ name: plan.name, devices: devices === "one" ? 1 : 2, price })}
+                        <Link
+                          href={`/checkout?duration=${plan.id}&devices=${devices === "one" ? 1 : 2}`}
                           className="block w-full text-center py-3.5 rounded-2xl font-black text-sm mb-4 transition-all hover:scale-[1.02] active:scale-[0.98]"
                           style={{
                             background: "linear-gradient(90deg,#F5B335,#FFC84A,#F5B335)",
@@ -229,7 +170,7 @@ export default function Pricing() {
                           }}
                         >
                           Bestill n&aring;
-                        </button>
+                        </Link>
 
                         <div
                           className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl mb-4 text-xs font-semibold"
@@ -319,9 +260,8 @@ export default function Pricing() {
                         )}
                       </div>
 
-                      <button
-                          type="button"
-                          onClick={() => setOffer({ name: plan.name, devices: devices === "one" ? 1 : 2, price })}
+                      <Link
+                          href={`/checkout?duration=${plan.id}&devices=${devices === "one" ? 1 : 2}`}
                         className="block w-full text-center py-3.5 rounded-2xl font-black text-sm mb-5 transition-all hover:scale-[1.02] active:scale-[0.98]"
                         style={{
                           background: "linear-gradient(90deg,#00205B 0%,#1a3a8f 50%,#00205B 100%)",
@@ -330,7 +270,7 @@ export default function Pricing() {
                         }}
                       >
                         Bestill n&aring;
-                      </button>
+                      </Link>
 
                       <div className={`h-px mb-5 ${dark ? "bg-white/[0.08]" : "bg-slate-100"}`} />
                     </div>
@@ -364,7 +304,6 @@ export default function Pricing() {
         </motion.div>
 
       </div>
-      {offer && <OrderForm offer={offer} onClose={() => setOffer(null)} />}
     </section>
   );
 }
