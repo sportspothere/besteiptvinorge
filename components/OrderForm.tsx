@@ -8,7 +8,7 @@ export type OrderOffer = { name: string; devices: number; price: number; kind?: 
 
 const COUNTRIES = ["Norge", "Sverige", "Danmark", "Finland", "Tyskland", "Frankrike", "USA", "Italia"];
 
-export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClose: () => void }) {
+export default function OrderForm({ offer, onClose, embedded = false }: { offer: OrderOffer; onClose?: () => void; embedded?: boolean }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const countryButton = useRef<HTMLButtonElement>(null);
   const [country, setCountry] = useState("");
@@ -21,6 +21,10 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
   const trial = offer.kind === "trial";
 
   useEffect(() => {
+    setOrderMessage("");
+  }, [offer.name, offer.devices, offer.price]);
+
+  useEffect(() => {
     if (orderMessage) {
       dialog.current?.scrollTo({ top: 0 });
       choiceHeading.current?.focus();
@@ -28,6 +32,7 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
   }, [orderMessage]);
 
   useEffect(() => {
+    if (embedded) return;
     const element = dialog.current;
     const previousOverflow = document.body.style.overflow;
     element?.showModal();
@@ -36,16 +41,19 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
       element?.close();
       document.body.style.overflow = previousOverflow;
     };
-  }, []);
+  }, [embedded]);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     for (const input of Array.from(form.querySelectorAll("input"))) {
-      input.value = input.value.trim();
+      input.value = input.value.trim().normalize("NFC");
       input.setCustomValidity("");
-      if (input.name === "fullName" && (input.value.length < 2 || !/\p{L}/u.test(input.value))) {
+      if (input.name === "fullName" && (!/^[\p{L}\p{M}][\p{L}\p{M} .’'-]{1,119}$/u.test(input.value) || input.value.replace(/[^\p{L}]/gu, "").length < 2)) {
         input.setCustomValidity("Skriv inn fullt navn med minst to tegn.");
+      }
+      if (input.name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+        input.setCustomValidity("Skriv inn en gyldig e-postadresse.");
       }
       if (input.name === "phone") {
         const digits = input.value.replace(/\D/g, "");
@@ -77,19 +85,11 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
 
   const inputClass = `mt-2 w-full rounded-xl border px-4 py-3 outline-hidden transition focus:ring-2 focus:ring-[#4d9de0] ${dark ? "border-white/15 bg-white/5 text-white" : "border-slate-200 bg-slate-50 text-slate-900"}`;
 
-  return (
-    <dialog
-      ref={dialog}
-      onCancel={onClose}
-      onClick={event => { if (event.target === event.currentTarget) onClose(); }}
-      aria-labelledby="order-title"
-      aria-describedby="order-description"
-      className={`m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-3xl border p-0 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-xs ${dark ? "border-white/10 bg-[#0b1024] text-white" : "border-slate-200 bg-white text-slate-900"}`}
-    >
+  const content = (
       <div className="p-6 sm:p-8">
         <div className="flex items-start justify-between gap-4">
           <h2 ref={choiceHeading} tabIndex={-1} id="order-title" className="text-2xl font-bold outline-hidden">{trial ? (orderMessage ? "Hvor vil du be om aktivering?" : "Prøv gratis i 24 timer") : (orderMessage ? "Hvordan vil du bestille?" : "Bestill abonnement")}</h2>
-          <button type="button" onClick={onClose} aria-label="Lukk skjema" className="rounded-full p-2 hover:bg-slate-400/15 focus-visible:ring-2 focus-visible:ring-[#4d9de0]"><X size={20} /></button>
+          {!embedded && <button type="button" onClick={onClose} aria-label="Lukk skjema" className="rounded-full p-2 hover:bg-slate-400/15 focus-visible:ring-2 focus-visible:ring-[#4d9de0]"><X size={20} /></button>}
         </div>
         <div className="my-5 rounded-2xl bg-gradient-to-r from-[#00205B] to-[#1a3a8f] p-4 text-white">
           <p className="font-bold">{offer.name}</p>
@@ -103,7 +103,7 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
           <p className={`pt-4 text-center text-sm ${dark ? "text-slate-400" : "text-slate-500"}`}>Har du ikke WhatsApp eller Telegram? Skriv til<br /><span className={`break-all font-semibold ${dark ? "text-slate-200" : "text-slate-800"}`}>bouhamidi.sal@gmail.com</span></p>
           <button type="button" onClick={() => {
             setOrderMessage("");
-            requestAnimationFrame(() => dialog.current?.querySelector<HTMLInputElement>('input[name="fullName"]')?.focus());
+            requestAnimationFrame(() => document.querySelector<HTMLInputElement>('input[name="fullName"]')?.focus());
           }} className="mx-auto flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:underline focus-visible:ring-2 focus-visible:ring-[#4d9de0]"><ArrowLeft size={16} />Endre opplysninger</button>
         </div>}
         <div hidden={!!orderMessage}>
@@ -161,6 +161,20 @@ export default function OrderForm({ offer, onClose }: { offer: OrderOffer; onClo
         </form>
         </div>
       </div>
+  );
+
+  if (embedded) return <section aria-labelledby="order-title">{content}</section>;
+
+  return (
+    <dialog
+      ref={dialog}
+      onCancel={onClose}
+      onClick={event => { if (event.target === event.currentTarget) onClose?.(); }}
+      aria-labelledby="order-title"
+      aria-describedby="order-description"
+      className={`m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-3xl border p-0 shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-xs ${dark ? "border-white/10 bg-[#0b1024] text-white" : "border-slate-200 bg-white text-slate-900"}`}
+    >
+      {content}
     </dialog>
   );
 }

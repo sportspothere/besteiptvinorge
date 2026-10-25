@@ -2,15 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { ArrowRight, Check, Moon, Sun, Tv, Gift, Clock } from "lucide-react";
 import { useLang } from "@/lib/lang-context";
 import Pricing from "@/components/sections/Pricing";
-import OrderForm from "@/components/OrderForm";
+import { useRouter } from "next/navigation";
 
 export default function AdLanding() {
   const { theme, toggleTheme } = useLang();
-  const [trialOpen, setTrialOpen] = useState(false);
+  const router = useRouter();
   const dark = theme === "dark";
   const muted = dark ? "text-slate-400" : "text-slate-600";
 
@@ -40,7 +39,7 @@ export default function AdLanding() {
               <h1 className="max-w-2xl text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">Din neste TV-opplevelse.<br /><span className="gradient-text">Prøv gratis i 24 timer.</span></h1>
               <p className={`mt-6 max-w-xl text-lg leading-relaxed ${muted}`}>Bli kjent med IPTV før du velger abonnement. Be om en gratis prøveperiode, og kontakt oss på WhatsApp, Telegram eller Gmail for aktivering.</p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <button type="button" onClick={() => setTrialOpen(true)} className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#F5B335] to-[#FFC84A] px-7 py-4 font-bold text-[#0f1e4a] shadow-[0_8px_32px_rgba(245,179,53,0.35)] transition hover:-translate-y-1 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-4"><Gift size={21} />Prøv gratis i 24 timer<ArrowRight size={19} /></button>
+                <button type="button" onClick={() => router.push("/checkout?duration=trial&devices=1")} className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#F5B335] to-[#FFC84A] px-7 py-4 font-bold text-[#0f1e4a] shadow-[0_8px_32px_rgba(245,179,53,0.35)] transition hover:-translate-y-1 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-4"><Gift size={21} />Prøv gratis i 24 timer<ArrowRight size={19} /></button>
                 <a href="#pricing" className="rounded-full px-4 py-3 text-sm font-semibold underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-[#4d9de0]">Se abonnement og priser</a>
               </div>
               <ul className={`mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm ${muted}`}>
@@ -75,7 +74,6 @@ export default function AdLanding() {
       <footer className={`border-t px-4 py-8 ${dark ? "border-white/10" : "border-slate-200"}`}>
         <div className={`mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm sm:flex-row ${muted}`}><p>Beste IPTV i Norge</p><Link href="/" className="underline underline-offset-4">Besøk hovedsiden</Link></div>
       </footer>
-      {trialOpen && <OrderForm offer={{ name: "Gratis IPTV-test – 24 timer", devices: 1, price: 0, kind: "trial" }} onClose={() => setTrialOpen(false)} />}
     </div>
   );
 }
