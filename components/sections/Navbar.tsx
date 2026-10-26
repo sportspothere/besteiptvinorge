@@ -3,12 +3,15 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useLang } from "@/lib/lang-context";
 import { t } from "@/lib/translations";
 
 const WA = "https://wa.me/447460010370?text=Hei%21%20Jeg%20er%20interessert%20i%20et%20IPTV-abonnement.%20Kan%20du%20sende%20meg%20mer%20informasjon%3F";
 
-export default function Navbar() {
+export default function Navbar({ standalone = false }: { standalone?: boolean }) {
+  const pathname = usePathname();
+  const home = pathname === "/" ? "" : "/";
   const { toggleTheme, theme } = useLang();
   const tx = t.no.nav;
   const isDark = theme === "dark";
@@ -35,11 +38,11 @@ export default function Navbar() {
       initial={false}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-12 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}
+      className={`fixed ${standalone ? "top-0" : "top-12"} left-0 right-0 z-50 transition-all duration-300 ${navBg}`}
       aria-label="Hovednavigasjon"
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm" aria-label="Beste IPTV i Norge – gå til toppen">
+        <a href={home || "#"} className="flex items-center focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#00205B] rounded-sm" aria-label="Beste IPTV i Norge – gå til toppen">
           <Image
             src="/logo/logo.png"
             alt="Beste IPTV i Norge-logo"
@@ -53,7 +56,7 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-6" aria-label="Sidenavigasjon">
           {tx.links.map((link, i) => (
-            <a key={i} href={tx.hrefs[i]} className={linkClass}>{link}</a>
+            <a key={i} href={`${home}${tx.hrefs[i]}`} className={linkClass}>{link}</a>
           ))}
         </nav>
 
@@ -113,7 +116,7 @@ export default function Navbar() {
             className={`md:hidden px-4 py-4 flex flex-col gap-4 ${mobileMenuBg}`}
           >
             {tx.links.map((link, i) => (
-              <a key={i} href={tx.hrefs[i]} onClick={() => setOpen(false)} className={mobileLinkClass}>
+              <a key={i} href={`${home}${tx.hrefs[i]}`} onClick={() => setOpen(false)} className={mobileLinkClass}>
                 {link}
               </a>
             ))}
