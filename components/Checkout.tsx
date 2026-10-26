@@ -57,7 +57,7 @@ export default function Checkout() {
           <dl className="mt-6 space-y-4 text-sm"><div className="flex justify-between gap-3"><dt className={muted}>Varighet</dt><dd className="text-right font-semibold">{name}</dd></div><div className="flex justify-between gap-3"><dt className={muted}>Antall enheter</dt><dd className="font-semibold">{devices}</dd></div></dl>
           <div className={`mt-6 border-t pt-6 ${dark ? "border-white/10" : "border-slate-200"}`} aria-live="polite" aria-atomic="true"><p className={`text-sm ${muted}`}>{trial ? "Gratis prøveperiode" : "Pris for valgt periode"}</p><p className="mt-2 text-4xl font-black">{price}<span className={`ml-2 text-lg font-medium ${muted}`}>kr</span></p></div>
           <p className={`mt-4 text-xs leading-relaxed ${muted}`}>{trial ? "Send forespørselen for å avtale aktivering av 24 timer gratis IPTV." : "Oppgitt pris må bekreftes. Avklar totalpris, innhold og vilkår før betaling."}</p>
-          <div className={`mt-6 border-t pt-5 text-sm ${dark ? "border-white/10" : "border-slate-200"}`}><p className="flex items-center gap-2"><Check size={16} className="text-emerald-500" />WhatsApp, Telegram eller Gmail</p><p className={`mt-3 text-xs leading-relaxed ${muted}`}>Ingen betaling trekkes på denne siden. Du ser over og sender meldingen selv.</p></div>
+          <div className={`mt-6 border-t pt-5 text-sm ${dark ? "border-white/10" : "border-slate-200"}`}><p className="flex items-center gap-2"><Check size={16} className="text-emerald-500" />WhatsApp eller e-post</p><p className={`mt-3 text-xs leading-relaxed ${muted}`}>Ingen betaling trekkes på denne siden. Du ser over og sender meldingen selv.</p></div>
         </aside>
       </div>
     </main>
