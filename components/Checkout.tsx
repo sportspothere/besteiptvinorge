@@ -45,7 +45,7 @@ export default function Checkout() {
           <section className="px-6 pt-6 sm:px-8 sm:pt-8" aria-labelledby="subscription-heading">
             <h2 id="subscription-heading" className="text-lg font-bold">1. Tilpass abonnementet</h2>
             <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
-              <ThemedDropdown label="Varighet" value={trial ? "trial" : plan.id} options={[{ value: "trial", label: "24 timer \u2013 gratis" }, ...PLANS.map(item => ({ value: item.id, label: item.name }))]} onChange={value => update(value, devices)} />
+              <ThemedDropdown label="Varighet" value={trial ? "trial" : plan.id} options={[...(trial ? [{ value: "trial", label: "24 timer \u2013 gratis" }] : []), ...PLANS.map(item => ({ value: item.id, label: item.name }))]} onChange={value => update(value, devices)} />
               <ThemedDropdown label="Antall enheter" value={String(devices)} disabled={trial} options={[{ value: "1", label: "1 enhet" }, { value: "2", label: "2 enheter" }]} onChange={value => update(trial ? "trial" : plan.id, Number(value))} />
             </div>
             {trial && <p className={`mt-3 text-xs ${muted}`}>Gratis prøveperiode gjelder én enhet.</p>}
