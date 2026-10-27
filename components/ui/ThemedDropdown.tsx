@@ -4,9 +4,10 @@ import { useId, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { useLang } from "@/lib/lang-context";
 
-export default function ThemedDropdown({ label, value, options, disabled = false, onChange }: {
+export default function ThemedDropdown({ label, value, selectedLabel, options, disabled = false, onChange }: {
   label: string;
   value: string;
+  selectedLabel?: string;
   options: { value: string; label: string }[];
   disabled?: boolean;
   onChange: (value: string) => void;
@@ -35,7 +36,7 @@ export default function ThemedDropdown({ label, value, options, disabled = false
         }
       }}
       className={`mt-2 flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 text-left outline-hidden transition focus:ring-2 focus:ring-[#4d9de0] disabled:cursor-not-allowed disabled:opacity-60 ${dark ? "border-white/15 bg-white/5 text-white" : "border-slate-200 bg-slate-50 text-slate-900"} ${open && !disabled ? "ring-2 ring-[#4d9de0]" : ""}`}>
-      <span id={`${id}-value`}>{options.find(option => option.value === value)?.label}</span>
+      <span id={`${id}-value`}>{selectedLabel ?? options.find(option => option.value === value)?.label}</span>
       <ChevronDown size={18} className={`shrink-0 transition-transform ${open && !disabled ? "rotate-180" : ""}`} />
     </button>
     {open && !disabled && <div ref={list} id={`${id}-options`} role="listbox" aria-labelledby={`${id}-label`} className={`mt-2 max-h-52 overflow-y-auto rounded-xl border p-1.5 shadow-lg ${dark ? "border-white/15 bg-[#151d35] text-slate-100" : "border-slate-200 bg-white text-slate-900"}`}>
