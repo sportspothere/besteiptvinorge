@@ -4,6 +4,8 @@ import { Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "@/lib/lang-context";
 import HtmlWrapper from "@/components/HtmlWrapper";
+import CookieConsent from "@/components/CookieConsent";
+import Footer from "@/components/sections/Footer";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -32,7 +34,7 @@ export const metadata: Metadata = siteMetadata;
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <HtmlWrapper fontVars={`${orbitron.variable} ${inter.variable}`}>
-      <LangProvider>{children}</LangProvider>
+      <LangProvider><CookieConsent>{children}<Footer /></CookieConsent></LangProvider>
     </HtmlWrapper>
   );
 }

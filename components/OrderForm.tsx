@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { X, ShoppingBag, ChevronDown, Check, MessageCircle, Mail, ArrowLeft } from "lucide-react";
+import { X, ShoppingBag, ChevronDown, Check, MessageCircle, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/lib/lang-context";
 
@@ -90,18 +90,16 @@ export default function OrderForm({ offer, onClose, embedded = false }: { offer:
   const content = (
       <div className="p-6 sm:p-8">
         <div className="flex items-start justify-between gap-4">
-          <h2 ref={choiceHeading} tabIndex={-1} id="order-title" className="text-2xl font-bold outline-hidden">{trial ? (orderMessage ? "Hvor vil du be om aktivering?" : "Prøv gratis i 24 timer") : (orderMessage ? "Hvordan vil du bestille?" : "Bestill abonnement")}</h2>
+          <h2 ref={choiceHeading} tabIndex={-1} id="order-title" className="text-2xl font-bold outline-hidden">{trial ? (orderMessage ? "Aktiver via WhatsApp" : "Prøv gratis i 24 timer") : (orderMessage ? "Bestill via WhatsApp" : "Bestill abonnement")}</h2>
           {!embedded && <button type="button" onClick={onClose} aria-label="Lukk skjema" className="rounded-full p-2 hover:bg-slate-400/15 focus-visible:ring-2 focus-visible:ring-[#4d9de0]"><X size={20} /></button>}
         </div>
         <div className="my-5 rounded-2xl bg-gradient-to-r from-[#00205B] to-[#1a3a8f] p-4 text-white">
           <p className="font-bold">{offer.name}</p>
           <p className="mt-1 text-sm text-slate-200">{offer.devices} {offer.devices === 1 ? "enhet" : "enheter"} · {offer.price} kr</p>
         </div>
-        <p id="order-description" className={`mb-5 text-sm ${dark ? "text-gray-400" : "text-slate-500"}`}>{trial ? (orderMessage ? "Velg WhatsApp eller Gmail. Meldingen ber om aktivering av din gratis prøveperiode på 24 timer. Se over og send den til oss." : "Fyll inn opplysningene dine og velg hvordan du vil kontakte oss for å aktivere 24 timer gratis IPTV.") : (orderMessage ? "Velg WhatsApp eller e-post. Bestillingen og opplysningene dine legges inn i meldingen. Se over og send den for å kontakte oss." : "Fyll inn opplysningene dine. Deretter velger du om du vil bestille via WhatsApp eller e-post.")}</p>
+        <p id="order-description" className={`mb-5 text-sm ${dark ? "text-gray-400" : "text-slate-500"}`}>{trial ? (orderMessage ? "Åpne WhatsApp for å be om aktivering av din gratis prøveperiode på 24 timer. Se over meldingen og send den til oss." : "Fyll inn opplysningene dine for å be om aktivering av 24 timer gratis IPTV via WhatsApp.") : (orderMessage ? "Bestillingen og opplysningene dine legges inn i en WhatsApp-melding. Se over og send meldingen til oss." : "Fyll inn opplysningene dine. Deretter sender du bestillingen via WhatsApp.")}</p>
         {orderMessage && <div className="space-y-3">
           <a href={`https://wa.me/447460010370?text=${encodeURIComponent(orderMessage)}`} target="_blank" rel="noopener noreferrer" onClick={() => router.push("/takk?channel=whatsapp")} className="flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#087d48] to-[#159c61] px-5 py-4 font-bold text-white shadow-lg transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-400"><MessageCircle size={21} />Skriv på WhatsApp</a>
-          <a href={`https://mail.google.com/mail/?hl=no&view=cm&fs=1&to=bouhamidi.sal%40gmail.com&su=${encodeURIComponent(`${trial ? "Gratis IPTV-test" : "IPTV-bestilling"}: ${offer.name}`)}&body=${encodeURIComponent(orderMessage)}`} target="_blank" rel="noopener noreferrer" onClick={() => router.push("/takk?channel=email")} className={`flex items-center justify-center gap-3 rounded-full border px-5 py-4 font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-400 ${dark ? "border-rose-400/50 text-rose-300 hover:bg-rose-400/10" : "border-rose-300 text-[#BA0C2F] hover:bg-rose-50"}`}><Mail size={21} />Skriv på Gmail</a>
-          <p className={`pt-4 text-center text-sm ${dark ? "text-slate-400" : "text-slate-500"}`}>Har du ikke WhatsApp? Skriv til<br /><span className={`break-all font-semibold ${dark ? "text-slate-200" : "text-slate-800"}`}>bouhamidi.sal@gmail.com</span></p>
           <button type="button" onClick={() => {
             setOrderMessage("");
             requestAnimationFrame(() => document.querySelector<HTMLInputElement>('input[name="fullName"]')?.focus());

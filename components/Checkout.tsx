@@ -8,6 +8,7 @@ import { useLang } from "@/lib/lang-context";
 import { PLANS } from "@/lib/offers";
 import OrderForm from "@/components/OrderForm";
 import ThemedDropdown from "@/components/ui/ThemedDropdown";
+import { CookieSettingsButton } from "@/components/CookieConsent";
 
 export default function Checkout() {
   const params = useSearchParams();
@@ -56,10 +57,11 @@ export default function Checkout() {
           <div className="flex items-center gap-3"><ShoppingBag size={21} className={dark ? "text-blue-300" : "text-[#00205B]"} /><h2 id="summary-heading" className="text-xl font-bold">Din bestilling</h2></div>
           <dl className="mt-6 space-y-4 text-sm"><div className="flex justify-between gap-3"><dt className={muted}>Varighet</dt><dd className="text-right font-semibold">{name}</dd></div><div className="flex justify-between gap-3"><dt className={muted}>Antall enheter</dt><dd className="font-semibold">{devices}</dd></div></dl>
           <div className={`mt-6 border-t pt-6 ${dark ? "border-white/10" : "border-slate-200"}`} aria-live="polite" aria-atomic="true"><p className={`text-sm ${muted}`}>{trial ? "Gratis prøveperiode" : "Pris for valgt periode"}</p><p className="mt-2 text-4xl font-black">{price}<span className={`ml-2 text-lg font-medium ${muted}`}>kr</span></p></div>
-          <p className={`mt-4 text-xs leading-relaxed ${muted}`}>{trial ? "Send forespørselen for å avtale aktivering av 24 timer gratis IPTV." : "Oppgitt pris må bekreftes. Avklar totalpris, innhold og vilkår før betaling."}</p>
-          <div className={`mt-6 border-t pt-5 text-sm ${dark ? "border-white/10" : "border-slate-200"}`}><p className="flex items-center gap-2"><Check size={16} className="text-emerald-500" />WhatsApp eller e-post</p><p className={`mt-3 text-xs leading-relaxed ${muted}`}>Ingen betaling trekkes på denne siden. Du ser over og sender meldingen selv.</p></div>
+          <p className={`mt-4 text-xs leading-relaxed ${muted}`}>{trial ? "Send forespørselen for å avtale aktivering av 24 timer gratis IPTV." : "Prisen er totalbeløpet for valgt plan. Vi sender en sikker betalingslenke, og abonnementet starter når betalingen er bekreftet."}</p>
+          <div className={`mt-6 border-t pt-5 text-sm ${dark ? "border-white/10" : "border-slate-200"}`}><p className="flex items-center gap-2"><Check size={16} className="text-emerald-500" />WhatsApp</p><p className={`mt-3 text-xs leading-relaxed ${muted}`}>Ingen betaling trekkes på denne siden. Du ser over og sender meldingen selv.</p></div>
         </aside>
       </div>
+      <div className={`mt-8 flex flex-wrap gap-4 text-xs ${muted}`}><a href="/personvernerklaering" className="underline underline-offset-4">Personvernerklæring</a><CookieSettingsButton className="underline underline-offset-4" /></div>
     </main>
   </div>;
 }

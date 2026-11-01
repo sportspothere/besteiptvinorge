@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Tv, Monitor, Zap, Shield } from "lucide-react";
+import { Check, Tv, Monitor, Zap, Shield, ShieldCheck, Headphones, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { PLANS } from "@/lib/offers";
 import { useLang } from "@/lib/lang-context";
@@ -39,10 +39,10 @@ export default function Pricing() {
             🇳🇴 Abonnement
           </span>
           <h2 className="font-orbitron font-black text-4xl md:text-5xl gradient-text mb-4">
-            IPTV-abonnement og priser
+            Abonnement hos Beste IPTV Norge
           </h2>
           <p className={`text-lg max-w-xl mx-auto ${dark ? "text-gray-400" : "text-slate-500"}`}>
-            Prisene er hentet fra den eksisterende oversikten og er ikke bekreftet. Avklar gjeldende totalpris, innhold og vilkår før bestilling.
+            Velg beste IPTV for dine behov ut fra varighet og antall enheter. Prisene nedenfor er totalbeløpet for valgt plan. Les om innhold og vilkår før bestilling.
           </p>
         </motion.div>
 
@@ -155,7 +155,7 @@ export default function Pricing() {
                           </AnimatePresence>
                           <div className="text-sm font-medium mt-1" style={{ color: "rgba(245,179,53,0.6)" }}>{plan.period}</div>
                           <div className="text-xs mt-1.5 font-semibold" style={{ color: "rgba(245,179,53,0.8)" }}>
-                            Pris for hele perioden må bekreftes
+                            Totalpris for hele perioden
                           </div>
                         </div>
 
@@ -200,7 +200,7 @@ export default function Pricing() {
                         style={{ background: "rgba(245,179,53,0.08)", border: "1px solid rgba(245,179,53,0.2)", color: "#FFC84A" }}
                       >
                         <Zap size={13} style={{ color: "#F5B335", flexShrink: 0 }} />
-                        <span>Avklar totalpris og fornyelse</span>
+                        <span>Les vilkår for fornyelse</span>
                       </div>
                     </div>
                   </motion.div>
@@ -292,13 +292,30 @@ export default function Pricing() {
           })}
         </div>
 
+        <aside aria-labelledby="guarantee-title" className={`mt-8 rounded-2xl border p-6 sm:p-8 ${dark ? "border-white/10 bg-white/[0.03]" : "border-[#00205B]/10 bg-blue-50/60"}`}>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <span className="w-fit shrink-0 rounded-xl bg-blue-500/10 p-3 text-blue-500"><ShieldCheck size={26} aria-hidden="true" /></span>
+            <div>
+              <h3 id="guarantee-title" className={`text-lg font-bold ${dark ? "text-white" : "text-[#00205B]"}`}>Prøv IPTV med ekstra trygghet</h3>
+              <p className={`mt-2 max-w-3xl text-sm leading-relaxed ${dark ? "text-gray-400" : "text-slate-600"}`}>Vi ønsker at du skal være trygg på valget ditt. Derfor tilbyr vi 30 dagers pengene-tilbake-garanti på ditt første betalte abonnement dersom tjenesten ikke fungerer for deg.</p>
+              <ul className={`mt-4 flex flex-wrap gap-x-6 gap-y-3 text-xs font-medium ${dark ? "text-gray-300" : "text-slate-600"}`}>
+                {[[ShieldCheck, "30 dagers pengene-tilbake-garanti"], [Headphones, "Enkel kontakt med kundeservice"], [RotateCcw, "Trygg refusjonsprosess"]].map(([Icon, text]) => {
+                  const TrustIcon = Icon as typeof ShieldCheck;
+                  return <li key={String(text)} className="flex items-center gap-2"><TrustIcon size={16} className="shrink-0 text-blue-500" aria-hidden="true" />{String(text)}</li>;
+                })}
+              </ul>
+              <Link href="/refusjonspolicy" className="mt-5 inline-block text-sm font-semibold text-blue-500 underline underline-offset-4 hover:text-blue-400">Les vår refusjonspolicy</Link>
+            </div>
+          </div>
+        </aside>
+
         <motion.div
           initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-6 mt-6"
         >
-          {["Avklar betalingsmåter", "Sjekk fornyelse og bindingstid", "Be om vilkår for oppsigelse, angrerett og klage"].map((item, i) => (
+          {["Sikker betalingslenke", "Sjekk fornyelse og bindingstid", "Be om vilkår for oppsigelse, angrerett og klage"].map((item, i) => (
             <span key={i} className={`text-sm font-medium ${dark ? "text-gray-400" : "text-slate-500"}`}>{item}</span>
           ))}
         </motion.div>

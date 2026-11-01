@@ -7,7 +7,6 @@ import Devices from "@/components/sections/Devices";
 import HowItWorks from "@/components/sections/HowItWorks";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AnnouncementBar from "@/components/AnnouncementBar";
 
@@ -40,7 +39,6 @@ export default function Home() {
           <FAQ />
           <Contact />
         </main>
-        <Footer />
         <FloatingWhatsApp />
       </div>
     </>

@@ -31,10 +31,10 @@ export default function Devices() {
           className="text-center mb-16"
         >
           <h2 id="devices-heading" className="font-orbitron font-black text-4xl md:text-5xl gradient-text mb-6">
-            Sjekk enheten din før bestilling
+            Beste IPTV på skjermen du foretrekker
           </h2>
           <p className={`text-lg max-w-2xl mx-auto ${dark ? "text-gray-400" : "text-slate-600"}`}>
-            Enhetene nedenfor er eksempler, ikke en bekreftet støtteliste. Oppgi modell, operativsystem og app for å avklare kompatibilitet.
+            Vil du bruke IPTV på Smart TV, mobil eller PC? Spør Beste IPTV Norge om modellen din og hvilken app du trenger. Enhetene nedenfor er eksempler; kompatibilitet må avklares før bestilling.
           </p>
         </motion.div>
 

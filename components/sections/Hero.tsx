@@ -10,7 +10,7 @@ const SLIDES = [
     src: "/optimized/slide1-1920.webp",
     alt: "Illustrasjon av fotballspillere på en stadion",
     badge: "🇳🇴 TV over internett",
-    tag: "Beste IPTV i Norge",
+    tag: "TV i din hverdag",
     tagBg: "#00205B",
     tagText: "#ffffff",
     barColor: "#00205B",
@@ -34,8 +34,6 @@ const SLIDES = [
     barColor: "#00205B",
   },
 ];
-
-const HEADLINE_GRADIENT = "linear-gradient(90deg, #00205B 0%, #ffffff 50%, #BA0C2F 100%)";
 
 export default function Hero() {
   const tx = t.no.hero;
@@ -109,26 +107,17 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
 
-        <AnimatePresence mode="wait">
-          <motion.h1
-            key="home-heading"
-            initial={false}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-orbitron font-black text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight mb-5 max-w-3xl drop-shadow-2xl"
-          >
-            <span className="text-white">{tx.headline1} </span>
-            <span style={{
-              background: HEADLINE_GRADIENT,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}>
-              {tx.headline2}
-            </span>
-          </motion.h1>
-        </AnimatePresence>
+        <motion.h1
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="font-orbitron font-black text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight mb-5 max-w-3xl text-white drop-shadow-2xl"
+        >
+          {tx.headline1}
+          <span className="block mt-3 text-xl sm:text-2xl md:text-4xl lg:text-5xl">
+            {tx.headline2}
+          </span>
+        </motion.h1>
 
         <motion.p
           initial={false}
@@ -138,6 +127,10 @@ export default function Hero() {
         >
           {tx.sub}
         </motion.p>
+
+        <p className="text-gray-200 text-sm sm:text-base max-w-xl mb-6 leading-relaxed">
+          Hos Beste IPTV Norge kan du utforske IPTV-abonnement og få hjelp til å avklare innhold og kompatibilitet før du bestiller.
+        </p>
 
         <motion.div
           initial={false}

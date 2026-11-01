@@ -16,8 +16,8 @@ export const siteUrl = productionOrigin(rawUrl);
 export const indexable = process.env.SITE_ENV === "production" && process.env.SEO_INDEXING === "true";
 if (indexable && !siteUrl) throw new Error("Indexable production builds require SITE_URL.");
 
-export const homeTitle = "IPTV i Norge – abonnement og oppsett | Beste IPTV i Norge";
-export const homeDescription = "Vurderer du TV over internett? Finn informasjon om abonnement, enheter og oppsett hos Beste IPTV i Norge, og spørsmål du bør avklare før du bestiller.";
+export const homeTitle = "Beste IPTV Norge | Abonnement, priser og hjelp med oppsett";
+export const homeDescription = "Leter du etter beste IPTV i Norge? Sammenlign IPTV-abonnement og priser, les om Smart TV og oppsett, og kontakt oss for hjelp til å velge en løsning som passer deg.";
 
 export const siteMetadata: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),

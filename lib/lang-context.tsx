@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useLayoutEffect, ReactNode } from "react";
 
 type Lang = "no";
 type Theme = "light" | "dark";
@@ -14,28 +14,33 @@ interface AppCtx {
 
 const AppContext = createContext<AppCtx>({
   lang: "no", toggleLang: () => {}, isRTL: false,
-  theme: "light", toggleTheme: () => {},
+  theme: "dark", toggleTheme: () => {},
 });
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
-  useEffect(() => {
-    const saved = localStorage.getItem("theme") as Theme | null;
-    const initial = saved === "dark" ? "dark" : "light";
+  useLayoutEffect(() => {
+    let initial: Theme = "dark";
+    try {
+      if (localStorage.getItem("theme") === "light") initial = "light";
+    } catch {
+      // Keep the default when browser storage is unavailable.
+    }
     setTheme(initial);
-    if (initial === "dark") document.documentElement.classList.add("dark");
-    else document.documentElement.classList.remove("dark");
+    document.documentElement.classList.toggle("dark", initial === "dark");
   }, []);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(t => t === "light" ? "dark" : "light");
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", next === "dark");
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Theme switching still works when browser storage is unavailable.
+    }
+    setTheme(next);
+  };
 
   return (
     <AppContext.Provider value={{ lang: "no", toggleLang: () => {}, isRTL: false, theme, toggleTheme }}>

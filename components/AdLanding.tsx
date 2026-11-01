@@ -37,13 +37,13 @@ export default function AdLanding() {
               <p className={`mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] ${dark ? "text-blue-300" : "text-[#00205B]"}`}><Tv size={17} />IPTV-abonnement i Norge</p>
               <div className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold ${dark ? "border-amber-300/30 bg-amber-300/10 text-amber-200" : "border-amber-300 bg-amber-50 text-amber-900"}`}><Gift size={17} />Gratis prøveperiode · 24 timer</div>
               <h1 className="max-w-2xl text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">Din neste TV-opplevelse.<br /><span className="gradient-text">Prøv gratis i 24 timer.</span></h1>
-              <p className={`mt-6 max-w-xl text-lg leading-relaxed ${muted}`}>Bli kjent med IPTV før du velger abonnement. Be om en gratis prøveperiode, og kontakt oss på WhatsApp, Telegram eller Gmail for aktivering.</p>
+              <p className={`mt-6 max-w-xl text-lg leading-relaxed ${muted}`}>Bli kjent med IPTV før du velger abonnement. Be om en gratis prøveperiode, og kontakt oss på WhatsApp for aktivering.</p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <button type="button" onClick={() => router.push("/checkout?duration=trial&devices=1")} className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#F5B335] to-[#FFC84A] px-7 py-4 font-bold text-[#0f1e4a] shadow-[0_8px_32px_rgba(245,179,53,0.35)] transition hover:-translate-y-1 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-4"><Gift size={21} />Prøv gratis i 24 timer<ArrowRight size={19} /></button>
                 <a href="#pricing" className="rounded-full px-4 py-3 text-sm font-semibold underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-[#4d9de0]">Se abonnement og priser</a>
               </div>
               <ul className={`mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm ${muted}`}>
-                {["24 timer gratis", "0 kr for prøveperioden", "Tre kontaktmåter"].map(item => <li key={item} className="flex items-center gap-2"><Check size={15} className={dark ? "text-blue-300" : "text-[#00205B]"} />{item}</li>)}
+                {["24 timer gratis", "0 kr for prøveperioden", "Kontakt via WhatsApp"].map(item => <li key={item} className="flex items-center gap-2"><Check size={15} className={dark ? "text-blue-300" : "text-[#00205B]"} />{item}</li>)}
               </ul>
             </div>
             <div className={`rounded-3xl border p-6 shadow-xl sm:p-8 ${dark ? "border-white/10 bg-[#0b1024]" : "border-slate-200 bg-white"}`}>
@@ -53,7 +53,7 @@ export default function AdLanding() {
                 {[
                   ["Be om en gratis prøveperiode", "Trykk på knappen og fyll inn opplysningene dine."],
                   ["Fyll inn opplysningene dine", "Vi trenger navn, e-post, telefonnummer og land."],
-                  ["Send forespørselen om aktivering", "Velg WhatsApp, Telegram eller Gmail. Meldingen er ferdig utfylt – se over og send den til oss."],
+                  ["Send forespørselen om aktivering", "Åpne WhatsApp. Meldingen er ferdig utfylt – se over og send den til oss."],
                 ].map(([title, description], index) => <li key={title} className="flex gap-4"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#00205B] text-sm font-bold text-white">{index + 1}</span><div><h3 className="font-bold">{title}</h3><p className={`mt-1 text-sm leading-relaxed ${muted}`}>{description}</p></div></li>)}
               </ol>
               <p className={`mt-7 border-t pt-5 text-xs leading-relaxed ${dark ? "border-white/10 text-slate-400" : "border-slate-100 text-slate-500"}`}>Prøveperioden aktiveres etter kontakt med oss. Skjemaet sender en forespørsel og aktiverer ikke tilgangen automatisk.</p>
@@ -64,16 +64,13 @@ export default function AdLanding() {
         <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
           <h2 className="mb-7 text-2xl font-bold sm:text-3xl">Før du bestiller</h2>
           {[
-            ["Hvordan får jeg 24 timer gratis?", "Trykk på «Prøv gratis i 24 timer», fyll inn skjemaet og send forespørselen via WhatsApp, Telegram eller Gmail. Vi hjelper deg med aktivering."],
-            ["Hvordan sender jeg bestillingen?", "Trykk på «Bestill nå» ved ønsket abonnement. Fyll inn skjemaet og velg WhatsApp, Telegram eller e-post. Du sender meldingen selv i tjenesten du velger."],
-            ["Må jeg ha WhatsApp?", "Nei. Du kan også kontakte oss på Telegram eller sende e-post via Gmail. E-postadressen vår er bouhamidi.sal@gmail.com."],
-            ["Hva bør jeg avklare først?", "Be om bekreftet totalpris, innholdsoversikt, støtte for enheten din og vilkår for levering, fornyelse og oppsigelse før du betaler."],
+            ["Hvordan får jeg 24 timer gratis?", "Trykk på «Prøv gratis i 24 timer», fyll inn skjemaet og send forespørselen via WhatsApp. Vi hjelper deg med aktivering."],
+            ["Hvordan sender jeg bestillingen?", "Trykk på «Bestill nå» ved ønsket abonnement. Fyll inn skjemaet og åpne WhatsApp. Se over den ferdig utfylte meldingen og send den til oss."],
+            ["Hvordan kontakter jeg kundeservice?", "Send oss en melding på WhatsApp. Du kan også bruke kontaktskjemaet på hovedsiden, som åpner WhatsApp med meldingen din."],
+            ["Hva bør jeg avklare først?", "Prisen i planoversikten er totalbeløpet for valgt plan. Sjekk innholdsoversikt, støtte for enheten din og vilkår for levering, fornyelse og oppsigelse før du betaler."],
           ].map(([question, answer]) => <details key={question} className={`border-b py-5 ${dark ? "border-white/10" : "border-slate-200"}`}><summary className="cursor-pointer font-semibold focus-visible:ring-2 focus-visible:ring-[#4d9de0]">{question}</summary><p className={`mt-3 text-sm leading-relaxed ${muted}`}>{answer}</p></details>)}
         </section>
       </main>
-      <footer className={`border-t px-4 py-8 ${dark ? "border-white/10" : "border-slate-200"}`}>
-        <div className={`mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm sm:flex-row ${muted}`}><p>Beste IPTV i Norge</p><Link href="/" className="underline underline-offset-4">Besøk hovedsiden</Link></div>
-      </footer>
     </div>
   );
 }
