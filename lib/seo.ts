@@ -14,6 +14,9 @@ function productionOrigin(value: string | undefined): string | undefined {
 }
 export const siteUrl = productionOrigin(rawUrl);
 export const indexable = process.env.SITE_ENV === "production" && process.env.SEO_INDEXING === "true";
+// Installation guides are explicitly intended for organic discovery. A separate
+// switch leaves the existing indexing policy for all other routes unchanged.
+export const installationIndexable = !!siteUrl && process.env.NODE_ENV === "production" && process.env.SITE_ENV !== "staging" && process.env.SEO_GUIDES_INDEXING !== "false";
 if (indexable && !siteUrl) throw new Error("Indexable production builds require SITE_URL.");
 
 export const homeTitle = "Beste IPTV Norge | Abonnement, priser og hjelp med oppsett";
