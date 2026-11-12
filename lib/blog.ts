@@ -1,5 +1,18 @@
-export type ArticleSection = { id: string; title: string; paragraphs: string[]; bullets?: string[] };
-export type BlogArticle = { slug: string; title: string; category: string; excerpt: string; sections: ArticleSection[]; related: string[] };
+import { besteIptvArticle } from "@/lib/blog-beste-iptv";
+
+export type Block =
+  | { p: string; lead?: string }
+  | { label: string }
+  | { list: string[]; ordered?: boolean }
+  | { table: { head: string[]; rows: string[][] } }
+  | { note: string }
+  | { links: { label: string; href: string }[] };
+export type ArticleSubsection = { id: string; title: string; blocks: Block[] };
+export type ArticleSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; blocks?: Block[]; subsections?: ArticleSubsection[]; faq?: { q: string; a: string }[] };
+export type BlogArticle = { slug: string; title: string; category: string; excerpt: string; sections: ArticleSection[]; related: string[]; metaTitle?: string; metaDescription?: string; intro?: Block[]; hero?: { src: string; alt: string; caption?: string; width: number; height: number } };
+
+export const blockText = (b: Block): string[] =>
+  "p" in b ? [b.lead ?? "", b.p] : "list" in b ? b.list : "table" in b ? b.table.rows.flat() : "note" in b ? [b.note] : "label" in b ? [b.label] : b.links.map(l => l.label);
 
 export const articles: BlogArticle[] = [
   {
@@ -22,6 +35,7 @@ export const articles: BlogArticle[] = [
       { id: "test-og-juster", title: "Test før du avslutter oppsettet", paragraphs: ["Åpne innhold som er bekreftet inkludert, og kontroller både bilde og lyd. Prøv mer enn én kanal eller tittel hvis noe ikke fungerer. Bruker du en gratis prøveperiode, bør du teste på enheten og nettverket du planlegger å bruke videre.", "Hvis appen ikke finnes, eller feltene er annerledes enn forventet, stopp og kontakt kundeservice med modellnavn og appversjon. Unngå fabrikktilbakestilling eller gjentatte appkjøp før årsaken er avklart."] },
     ], related: ["hvordan-fungerer-iptv", "iptv-fryser-eller-stopper"],
   },
+  besteIptvArticle,
   {
     slug: "hva-bor-du-sjekke-for-du-velger-iptv", title: "Hva bør du sjekke før du velger IPTV-abonnement?", category: "Tips og råd",
     excerpt: "En oversikt over innhold, pris, enheter og vilkår som gjør det enklere å velge et abonnement som passer deg.",

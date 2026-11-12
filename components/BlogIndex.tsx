@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Search } from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import { useLang } from "@/lib/lang-context";
-import { articles, blogCategories, type BlogArticle } from "@/lib/blog";
+import { articles, blockText, blogCategories, type BlogArticle } from "@/lib/blog";
 
 const searchable = (value: string) => value.normalize("NFD").replace(/\p{M}/gu, "").toLocaleLowerCase("nb-NO");
 
@@ -17,7 +17,7 @@ export default function BlogIndex() {
   const muted = dark ? "text-slate-400" : "text-slate-600";
   const panel = dark ? "border-white/10 bg-[#0b1020]" : "border-slate-200 bg-white";
   const featured = !query.trim() && category === "Alle" ? articles[0] : null;
-  const filtered = articles.filter(a => (category === "Alle" || category === a.category) && searchable([a.title, a.excerpt, ...a.sections.flatMap(s => [s.title, ...s.paragraphs, ...(s.bullets ?? [])])].join(" ")).includes(searchable(query.trim())));
+  const filtered = articles.filter(a => (category === "Alle" || category === a.category) && searchable([a.title, a.excerpt, ...(a.intro ?? []).flatMap(blockText), ...a.sections.flatMap(s => [s.title, ...s.paragraphs, ...(s.bullets ?? []), ...(s.blocks ?? []).flatMap(blockText), ...(s.subsections ?? []).flatMap(sub => [sub.title, ...sub.blocks.flatMap(blockText)]), ...(s.faq ?? []).flatMap(f => [f.q, f.a])])].join(" ")).includes(searchable(query.trim())));
   const grid = featured ? filtered.filter(a => a.slug !== featured.slug) : filtered;
   const card = (article: BlogArticle) => <article key={article.slug} className={`flex flex-col rounded-2xl border p-6 transition hover:-translate-y-1 hover:border-blue-400/40 ${panel}`}>
     <span className="mb-5 w-fit rounded-full bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-500">{article.category}</span>
